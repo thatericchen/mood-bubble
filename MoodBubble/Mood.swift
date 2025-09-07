@@ -24,6 +24,7 @@ struct Mood: Identifiable, Codable {
     }
 }
 
+// For color selection
 struct MoodColor: Identifiable {
     let id = UUID()
     let name: String

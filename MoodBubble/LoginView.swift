@@ -13,6 +13,7 @@ struct LoginView: View {
     
     var body: some View {
         VStack(spacing: 20) {
+            // App Logo/Title
             Text("🫧 MoodBubble")
                 .font(.largeTitle)
                 .fontWeight(.bold)
@@ -24,6 +25,7 @@ struct LoginView: View {
             
             Spacer()
             
+            // Input Fields
             VStack(spacing: 15) {
                 TextField("Email", text: $email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -41,6 +43,7 @@ struct LoginView: View {
             }
             .padding(.horizontal)
             
+            // Action Buttons
             VStack(spacing: 10) {
                 Button(action: {
                     if isSignUp {
