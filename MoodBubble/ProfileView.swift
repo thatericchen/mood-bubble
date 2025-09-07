@@ -99,22 +99,45 @@ struct ProfileView: View {
     
     func fetchUserMoods() {
         isLoading = true
-        guard let userId = Auth.auth().currentUser?.uid else {
-            isLoading = false
-            return
-        }
-        
+        let currentUserName = userEmail.components(separatedBy: "@").first ?? "User"
         let db = Firestore.firestore()
         db.collection("moods")
-            .whereField("userId", isEqualTo: userId)
-            .order(by: "timestamp", descending: true)
+            .whereField("userName", isEqualTo: currentUserName)
             .getDocuments { snapshot, error in
                 isLoading = false
                 
+                if let error = error {
+                    userMoods = []
+                    return
+                }
+                
                 if let documents = snapshot?.documents {
-                    userMoods = documents.compactMap { document in
-                        try? document.data(as: Mood.self)
+                    let fetchedMoods: [Mood] = documents.compactMap { document in
+                        let data = document.data()
+                        
+                        guard let userId = data["userId"] as? String,
+                              let userName = data["userName"] as? String,
+                              let color = data["color"] as? String,
+                              let emoji = data["emoji"] as? String,
+                              let timestamp = data["timestamp"] as? Timestamp else {
+                            return nil
+                        }
+                        
+                        let description = data["description"] as? String ?? ""
+                                                
+                        return Mood(
+                            id: document.documentID,
+                            userId: userId,
+                            userName: userName,
+                            color: color,
+                            emoji: emoji,
+                            description: description,
+                            timestamp: timestamp.dateValue()
+                        )
                     }
+                    
+                    userMoods = fetchedMoods.sorted { $0.timestamp > $1.timestamp }
+                    
                 } else {
                     userMoods = []
                 }
