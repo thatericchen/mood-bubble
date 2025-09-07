@@ -99,51 +99,20 @@ struct ProfileView: View {
     
     func fetchUserMoods() {
         isLoading = true
-        
-        // FIX 1: Proper nil checking instead of force unwrapping
-        guard let userId = Auth.auth().currentUser?.uid else {
-            isLoading = false
-            print("Error: No authenticated user found")
-            return
-        }
+        let userId = Auth.auth().currentUser!.uid
         
         let db = Firestore.firestore()
         db.collection("moods")
             .whereField("userId", isEqualTo: userId)
             .order(by: "timestamp", descending: true)
-            .getDocuments { snapshot, error in // FIX 2: Remove capture list since structs don't have retain cycles
+            .getDocuments { [self] snapshot, error in
+                isLoading = false
                 
-                // FIX 3: Always update loading state on main thread
-                DispatchQueue.main.async { [self] in
-                    self.isLoading = false
-                }
-                
-                // FIX 4: Proper error handling
-                if let error = error {
-                    print("Error fetching moods: \(error.localizedDescription)")
-                    DispatchQueue.main.async { [self] in
-                        self.userMoods = []
-                    }
-                    return
-                }
-                
-                // FIX 5: Safe optional binding instead of force unwrapping
-                guard let documents = snapshot?.documents else {
-                    print("No documents found")
-                    DispatchQueue.main.async { [self] in
-                        self.userMoods = []
-                    }
-                    return
-                }
-                
-                let moods = documents.compactMap { document in
+                let documents = snapshot!.documents
+                userMoods = documents.compactMap { document in
                     try? document.data(as: Mood.self)
                 }
                 
-                // FIX 6: Update UI on main thread
-                DispatchQueue.main.async { [self] in
-                    self.userMoods = moods
-                }
             }
     }
     
