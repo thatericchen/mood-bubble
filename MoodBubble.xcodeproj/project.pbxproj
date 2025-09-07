@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A3ED05F2E6E14B10050DE58 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 8A3ED05E2E6E14B10050DE58 /* README.md */; };
 		8A8C7A052E6CB560000B90AB /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 8A8C7A042E6CB560000B90AB /* FirebaseAuth */; };
 		8A8C7A072E6CB560000B90AB /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 8A8C7A062E6CB560000B90AB /* FirebaseFirestore */; };
 		8A8C7A092E6CB560000B90AB /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 8A8C7A082E6CB560000B90AB /* FirebaseMessaging */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8A3ED05E2E6E14B10050DE58 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8AFB71962E6A34750001B8AD /* MoodBubble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoodBubble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -43,6 +45,7 @@
 			children = (
 				8AFB71982E6A34750001B8AD /* MoodBubble */,
 				8AFB71972E6A34750001B8AD /* Products */,
+				8A3ED05E2E6E14B10050DE58 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -124,6 +127,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A3ED05F2E6E14B10050DE58 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

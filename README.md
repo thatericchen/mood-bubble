@@ -3,7 +3,7 @@
 ## Description
 MoodBubble is a social mood-tracking app where users can log their daily moods using colors and emojis, and see their friends' moods in a feed interface.
 
-## Technologies Used
+## Tech Stack
 - **iOS Development**: Swift, SwiftUI
 - **Backend**: Firebase (Authentication, Firestore)
 - **Version Control**: Git/GitHub
@@ -22,7 +22,6 @@ MoodBubble is a social mood-tracking app where users can log their daily moods u
    ```
 
 2. **Open in Xcode**
-   - Open `MoodBubble.xcodeproj` in Xcode
 
 3. **Wait for dependencies to install**
    - Xcode will automatically download Firebase packages
