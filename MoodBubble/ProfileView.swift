@@ -1,9 +1,3 @@
-//
-//  ProfileView.swift
-//  MoodBubble
-//
-//  Created by Alvin Le on 9/7/25.
-//
 import SwiftUI
 
 struct ProfileView: View {
