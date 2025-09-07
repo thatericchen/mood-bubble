@@ -1,14 +1,14 @@
-//
-//  MoodBubbleApp.swift
-//  MoodBubble
-//
-//  Created by Eric Chen on 9/4/25.
-//
-
 import SwiftUI
+import Firebase
 
 @main
 struct MoodBubbleApp: App {
+    
+    init() {
+        FirebaseApp.configure()
+        print("Firebase configured!")
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
