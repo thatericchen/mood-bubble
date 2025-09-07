@@ -34,7 +34,7 @@ MoodBubble is a social mood-tracking app where users can log their daily moods u
    - If no team available: Xcode → Settings → Accounts → Add your Apple ID
 
 5. **Run the app**
-   - Select a simulator (e.g., "iPhone 16 Pro") from the device menu
+   - Select a simulator (e.g., "iPhone 16 Pro") from the device menu OR connect a physical iPhone
    - Press ▶️
    - The app will build and launch!
 
