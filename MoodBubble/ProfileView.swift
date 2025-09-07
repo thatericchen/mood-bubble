@@ -13,6 +13,7 @@ struct ProfileView: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 20) {
+                    // User Info Card
                     VStack(spacing: 15) {
                         Image(systemName: "person.circle.fill")
                             .font(.system(size: 80))
@@ -35,6 +36,7 @@ struct ProfileView: View {
                     .cornerRadius(15)
                     .padding(.horizontal)
                     
+                    // Mood History
                     VStack(alignment: .leading) {
                         Text("Your Mood History")
                             .font(.headline)
@@ -75,6 +77,7 @@ struct ProfileView: View {
                         }
                     }
                     
+                    // Sign Out Button
                     Button(action: signOut) {
                         Text("Sign Out")
                             .fontWeight(.semibold)
@@ -99,20 +102,25 @@ struct ProfileView: View {
     
     func fetchUserMoods() {
         isLoading = true
-        let userId = Auth.auth().currentUser!.uid
+        guard let userId = Auth.auth().currentUser?.uid else { 
+            isLoading = false
+            return 
+        }
         
         let db = Firestore.firestore()
         db.collection("moods")
             .whereField("userId", isEqualTo: userId)
             .order(by: "timestamp", descending: true)
-            .getDocuments { [self] snapshot, error in
+            .getDocuments { snapshot, error in
                 isLoading = false
                 
-                let documents = snapshot!.documents
-                userMoods = documents.compactMap { document in
-                    try? document.data(as: Mood.self)
+                if let documents = snapshot?.documents {
+                    userMoods = documents.compactMap { document in
+                        try? document.data(as: Mood.self)
+                    }
+                } else {
+                    userMoods = []
                 }
-                
             }
     }
     
