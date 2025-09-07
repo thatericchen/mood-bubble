@@ -13,7 +13,6 @@ struct ProfileView: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 20) {
-                    // User Info Card
                     VStack(spacing: 15) {
                         Image(systemName: "person.circle.fill")
                             .font(.system(size: 80))
@@ -36,7 +35,6 @@ struct ProfileView: View {
                     .cornerRadius(15)
                     .padding(.horizontal)
                     
-                    // Mood History
                     VStack(alignment: .leading) {
                         Text("Your Mood History")
                             .font(.headline)
@@ -77,7 +75,6 @@ struct ProfileView: View {
                         }
                     }
                     
-                    // Sign Out Button
                     Button(action: signOut) {
                         Text("Sign Out")
                             .fontWeight(.semibold)
@@ -102,9 +99,9 @@ struct ProfileView: View {
     
     func fetchUserMoods() {
         isLoading = true
-        guard let userId = Auth.auth().currentUser?.uid else { 
+        guard let userId = Auth.auth().currentUser?.uid else {
             isLoading = false
-            return 
+            return
         }
         
         let db = Firestore.firestore()

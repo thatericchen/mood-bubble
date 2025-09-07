@@ -29,7 +29,6 @@ struct AddMoodView: View {
                         .fontWeight(.bold)
                         .padding(.top)
                     
-                    // Color Selection
                     VStack(alignment: .leading) {
                         Text("Choose a color")
                             .font(.headline)
@@ -55,7 +54,6 @@ struct AddMoodView: View {
                         .padding()
                     }
                     
-                    // Emoji Selection
                     VStack(alignment: .leading) {
                         Text("Add an emoji")
                             .font(.headline)
@@ -87,7 +85,6 @@ struct AddMoodView: View {
                     
                     Spacer()
                     
-                    // Save Button
                     Button(action: saveMood) {
                         if isSaving {
                             ProgressView()
@@ -113,7 +110,6 @@ struct AddMoodView: View {
                     }
                 }
                 
-                // Overlay Alert (appears in true center of screen)
                 if showAlert {
                     Color.black.opacity(0.3)
                         .ignoresSafeArea()
@@ -155,6 +151,7 @@ struct AddMoodView: View {
             "userName": userEmail.components(separatedBy: "@").first ?? "User",
             "color": selectedColor,
             "emoji": selectedEmoji,
+            "description": "",
             "timestamp": Timestamp(date: Date())
         ]
         
@@ -172,12 +169,10 @@ struct AddMoodView: View {
                 isSuccessAlert = true
                 showAlert = true
                 
-                // Auto-dismiss alert and reset form after 2 seconds
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     withAnimation {
                         showAlert = false
                     }
-                    // Reset to defaults
                     selectedColor = "blue"
                     selectedEmoji = "😊"
                 }
@@ -192,7 +187,7 @@ struct AddMoodView: View {
         content.sound = .default
         
         var dateComponents = DateComponents()
-        dateComponents.hour = 20  // 8 PM
+        dateComponents.hour = 20
         dateComponents.minute = 0
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
